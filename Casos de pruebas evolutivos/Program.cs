@@ -10,7 +10,7 @@ namespace Casos_de_pruebas_evolutivos
     {
         static void Main(string[] args)
         {
-            Dictionary<String, Nodo> nodos = new Dictionary<string, Nodo>();
+            Grafo nodos = new Grafo();
 
             //Funciones
             Func<Nodo, object[], object> F1 = (nodo, data) =>
@@ -71,29 +71,26 @@ namespace Casos_de_pruebas_evolutivos
 
 
             //Nodos
-            nodos.Add("nodo1", new Nodo(F1));
-            nodos.Add("nodo2", new Nodo(F2));
-            nodos.Add("nodo3", new Nodo(F3));
-            nodos.Add("nodo4", new Nodo(F4));
-            nodos.Add("nodo5", new Nodo(F5));
-            nodos.Add("nodo6", new Nodo(F6));
+            nodos.AddNodo("nodo1", new Nodo(F1));
+            nodos.AddNodo("nodo2", new Nodo(F2));
+            nodos.AddNodo("nodo3", new Nodo(F3));
+            nodos.AddNodo("nodo4", new Nodo(F4));
+            nodos.AddNodo("nodo5", new Nodo(F5));
+            nodos.AddNodo("nodo6", new Nodo(F6));
 
             //Relaciones
-            nodos["nodo1"].AddNodo("nodo2", nodos["nodo2"]);
+            nodos.RelacionarNodos("nodo1", "nodo2");
+            nodos.RelacionarNodos("nodo2", "nodo3");
+            nodos.RelacionarNodos("nodo2", "nodo4");
+            nodos.RelacionarNodos("nodo3", "nodo4");
+            nodos.RelacionarNodos("nodo4", "nodo5");
+            nodos.RelacionarNodos("nodo4", "nodo6");
+            nodos.RelacionarNodos("nodo5", "nodo6");
 
-            nodos["nodo2"].AddNodo("nodo3", nodos["nodo3"]);
-            nodos["nodo2"].AddNodo("nodo4", nodos["nodo4"]);
-
-            nodos["nodo3"].AddNodo("nodo4", nodos["nodo4"]);
-
-            nodos["nodo4"].AddNodo("nodo5", nodos["nodo5"]);
-            nodos["nodo4"].AddNodo("nodo6", nodos["nodo6"]);
-
-            nodos["nodo5"].AddNodo("nodo6", nodos["nodo6"]);
 
 
             //Ejecucion
-            nodos["nodo1"].F(nodos["nodo1"], new object[] { 52, 6 });            
+            nodos.GetRaiz("nodo1").F(nodos.GetRaiz("nodo1"), new object[] { 52, 6 });            
             Console.ReadKey();
         }
     }
