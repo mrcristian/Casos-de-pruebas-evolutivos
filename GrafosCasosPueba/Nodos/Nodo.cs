@@ -6,6 +6,8 @@ namespace GrafosCasosPrueba.Nodos
 {
     public class Nodo
     {
+        public string  Nombre { get; set; }
+
         public Dictionary<string, Nodo> Nodos { get; set; }
 
         public Func<Nodo, object[], object> F { get; set; }
@@ -14,8 +16,10 @@ namespace GrafosCasosPrueba.Nodos
         {
 
         }
-        public Nodo(Func<Nodo, object[], object> funcion)
+        public Nodo(Func<Nodo, object[], object> funcion,
+            string nombre)
         {
+            Nombre = nombre;
             Nodos = new Dictionary<string, Nodo>();
             F = funcion;
         }

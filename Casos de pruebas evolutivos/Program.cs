@@ -23,16 +23,19 @@ namespace Casos_de_pruebas_evolutivos
              };
             Func<Nodo, object[], object> F2 = (nodo, data) =>
             {
-                if (Convert.ToInt32(nodo.GetVariable("P")) + Convert.ToInt32(nodo.GetVariable("Q")) > 10)
+                if (Convert.ToInt32(nodo.GetVariable("P"))
+                + Convert.ToInt32(nodo.GetVariable("Q")) > 10)
                 {
                     Console.WriteLine("mayor");
-                    nodo.Nodos.ToList()[0].Value.F(nodo.Nodos.ToList()[0].Value, null);
+                    nodo.Nodos.ToList()[0].Value.F(
+                        nodo.Nodos.ToList()[0].Value, null);
                     return true;
                 }
                 else
                 {
                     Console.WriteLine("menor");
-                    nodo.Nodos.ToList()[1].Value.F(nodo.Nodos.ToList()[1].Value, null);
+                    nodo.Nodos.ToList()[1].Value.F(
+                        nodo.Nodos.ToList()[1].Value, null);
                     return false;
                 }
             };
@@ -47,13 +50,15 @@ namespace Casos_de_pruebas_evolutivos
                 if (Convert.ToInt32(nodo.GetVariable("P")) > 50)
                 {
                     Console.WriteLine("mayor");
-                    nodo.Nodos.ToList()[0].Value.F(nodo.Nodos.ToList()[0].Value, null);
+                    nodo.Nodos.ToList()[0].Value.F(
+                        nodo.Nodos.ToList()[0].Value, null);
                     return true;
                 }
                 else
                 {
                     Console.WriteLine("menor");
-                    nodo.Nodos.ToList()[1].Value.F(nodo.Nodos.ToList()[1].Value, null);
+                    nodo.Nodos.ToList()[1].Value.F(
+                        nodo.Nodos.ToList()[1].Value, null);
                     return false;
                 }
             };
@@ -71,12 +76,12 @@ namespace Casos_de_pruebas_evolutivos
 
 
             //Nodos
-            nodos.AddNodo("nodo1", new Nodo(F1));
-            nodos.AddNodo("nodo2", new Nodo(F2));
-            nodos.AddNodo("nodo3", new Nodo(F3));
-            nodos.AddNodo("nodo4", new Nodo(F4));
-            nodos.AddNodo("nodo5", new Nodo(F5));
-            nodos.AddNodo("nodo6", new Nodo(F6));
+            nodos.AddNodo("nodo1", new Nodo(F1, "nodo1"));
+            nodos.AddNodo("nodo2", new Nodo(F2, "nodo2"));
+            nodos.AddNodo("nodo3", new Nodo(F3, "nodo3"));
+            nodos.AddNodo("nodo4", new Nodo(F4, "nodo4"));
+            nodos.AddNodo("nodo5", new Nodo(F5, "nodo5"));
+            nodos.AddNodo("nodo6", new Nodo(F6, "nodo6"));
 
             //Relaciones
             nodos.RelacionarNodos("nodo1", "nodo2");
@@ -90,7 +95,10 @@ namespace Casos_de_pruebas_evolutivos
 
 
             //Ejecucion
-            nodos.GetRaiz("nodo1").F(nodos.GetRaiz("nodo1"), new object[] { 52, 6 });            
+            nodos.GetRaiz().F(nodos.GetRaiz(),
+                new object[] { 52, 6 });
+            Console.WriteLine($"La complejidad Ciclomática del " +
+                $"grafo es de {nodos.GetCC()}");
             Console.ReadKey();
         }
     }
