@@ -8,14 +8,17 @@ namespace GrafosCasosPrueba.Nodos
     public class Grafo
     {
         private int _numAristas;
-        Dictionary<string, Nodo> _grafo;
+        private Dictionary<string, Nodo> _grafo;
+        public int nVariables { get; set; }
+        public float[] variables { get; set; }
 
-        
 
-        public Grafo()
+        public Grafo(int nVariables, float[]variables)
         {
             _numAristas = 0;
             _grafo = new Dictionary<string, Nodo>();
+            this.nVariables = nVariables;
+            this.variables = variables;
         }
 
         public void AddNodo(string key,Nodo newNodo) {

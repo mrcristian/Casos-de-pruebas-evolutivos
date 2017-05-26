@@ -1,4 +1,6 @@
 ﻿
+using Casos_de_pruebas_evolutivos.Modelo;
+using Genetics.Algorithims;
 using GrafosCasosPrueba.Nodos;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,16 @@ namespace Casos_de_pruebas_evolutivos
     {
         static void Main(string[] args)
         {
-            Grafo nodos = new Grafo();
+            #region funcionDeEvaluacion
+            IndividuoPrueba.SetEvaluacion((ind) =>
+            {
+                Dictionary<String, String> recorridos = new Dictionary<string, string>();                
+                
+                return 1;
+            });
+            #endregion
+
+            Grafo nodos = new Grafo(2,new float[] { 3,6 });
 
             //Funciones
             Func<Nodo, object[], object> F1 = (nodo, data) =>
@@ -92,6 +103,18 @@ namespace Casos_de_pruebas_evolutivos
             nodos.RelacionarNodos("nodo4", "nodo6");
             nodos.RelacionarNodos("nodo5", "nodo6");
 
+
+            Random r = new Random();
+            int size = nodos.nVariables * nodos.GetCC();
+            //Creacion genetico
+            GeneticAlgorithm<IndividuoPrueba> genetico = new GeneticAlgorithm<IndividuoPrueba>(10, 5, () => {
+                var _representacion = new float[size];
+                for (int i = 0; i < size; i++)
+                {
+                    _representacion[i] = r.Next();
+                }
+                return new IndividuoPrueba( ref nodos, _representacion);
+            }); 
 
 
             //Ejecucion
