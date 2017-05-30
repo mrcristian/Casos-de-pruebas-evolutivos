@@ -37,6 +37,17 @@ namespace GrafosCasosPrueba.Nodos
         }
 
         /// <summary>
+        /// Función que muestra el camino recorrido por un caso de prueba
+        /// </summary>
+        /// <param name="variables">array de objetos con las variables iniciales
+        /// del progeama</param>
+        /// <returns></returns>
+        public string getCamino(float[] variables)
+        {
+            return this.GetRaiz().F(this.GetRaiz(), variables);
+        }
+
+        /// <summary>
         /// Función que permite calcular la complejidad ciclomática
         /// de un grafo
         /// </summary>

@@ -15,73 +15,89 @@ namespace Casos_de_pruebas_evolutivos
             #region funcionDeEvaluacion
             IndividuoPrueba.SetEvaluacion((ind) =>
             {
-                Dictionary<String, String> recorridos = new Dictionary<string, string>();                
-                
-                return 1;
+                Dictionary<string, string> recorridos
+                = new Dictionary<string, string>();
+                for (int i = 0; i < ind._representacion.Length;
+                    i += ind.NumVariables)
+                {
+                    var variables = new float[ind.NumVariables];
+                    for (int j = 0; j < ind.NumVariables; j++)
+                    {
+                        variables[j] = ind._representacion[i+j];
+                    }
+                    var camino = ind._grafo.getCamino(variables);
+                    if (!recorridos.ContainsKey(camino))
+                        recorridos.Add(camino, camino);
+                }
+                return recorridos.Count;
             });
             #endregion
 
-            Grafo nodos = new Grafo(2,new float[] { 3,6 });
+            Grafo nodos = new Grafo(2, new float[] { 3, 6 });
 
             //Funciones
-            Func<Nodo, object[], int> F1 = (nodo, data) =>
+            Func<Nodo, float[], string> F1 = (nodo, data) =>
              {
                  nodo.SetVariable("P", data[0]);
                  nodo.SetVariable("Q", data[1]);
 
-                 var n = nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) +1;
+
+                 var n = nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) +
+                 "-" + nodo.Nombre;
                  return n;
              };
-            Func<Nodo, object[], int> F2 = (nodo, data) =>
+            Func<Nodo, float[], string> F2 = (nodo, data) =>
             {
                 if (Convert.ToInt32(nodo.GetVariable("P"))
                 + Convert.ToInt32(nodo.GetVariable("Q")) > 10)
                 {
-                    Console.WriteLine("mayor");
                     
+
                     return nodo.Nodos.ToList()[0].Value.F(
-                        nodo.Nodos.ToList()[0].Value, null) +1;
+                        nodo.Nodos.ToList()[0].Value, null) + "-" + nodo.Nombre;
                 }
                 else
                 {
-                    Console.WriteLine("menor");
+                    
                     return nodo.Nodos.ToList()[1].Value.F(
-                        nodo.Nodos.ToList()[1].Value, null) + 1;
+                        nodo.Nodos.ToList()[1].Value, null) + "-" + nodo.Nombre;
                 }
             };
-            Func<Nodo, object[], int> F3 = (nodo, data) =>
+            Func<Nodo, float[], string> F3 = (nodo, data) =>
             {
-                Console.WriteLine("Largo");
-                return nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) + 1;
                 
+                return nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) 
+                + "-" + nodo.Nombre;
+
             };
-            Func<Nodo, object[], int> F4 = (nodo, data) =>
+            Func<Nodo, float[], string> F4 = (nodo, data) =>
             {
                 if (Convert.ToInt32(nodo.GetVariable("P")) > 50)
                 {
-                    Console.WriteLine("mayor");
-                    return nodo.Nodos.ToList()[0].Value.F(
-                        nodo.Nodos.ToList()[0].Value, null) + 1;
                     
+                    return nodo.Nodos.ToList()[0].Value.F(
+                        nodo.Nodos.ToList()[0].Value, null) + "-" + nodo.Nombre;
+
                 }
                 else
                 {
-                    Console.WriteLine("menor");
-                    return nodo.Nodos.ToList()[1].Value.F(
-                        nodo.Nodos.ToList()[1].Value, null) + 1;
                     
+                    return nodo.Nodos.ToList()[1].Value.F(
+                        nodo.Nodos.ToList()[1].Value, null) + "-" + nodo.Nombre;
+
                 }
             };
-            Func<Nodo, object[], int> F5 = (nodo, data) =>
+            Func<Nodo, float[], string> F5 = (nodo, data) =>
             {
-                Console.WriteLine("P largo");
-                return nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) + 1;
                 
+                return nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) 
+                + "-" + nodo.Nombre;
+
             };
-            Func<Nodo, object[], int> F6 = (nodo, data) =>
+            Func<Nodo, float[], string> F6 = (nodo, data) =>
             {
-                Console.Write("Fin");
-                return 1;
+                
+                return nodo.Nombre;
             };
 
 
@@ -106,25 +122,25 @@ namespace Casos_de_pruebas_evolutivos
             Random r = new Random();
             int size = nodos.nVariables * nodos.GetCC();
             //Creacion genetico
-            GeneticAlgorithm<IndividuoPrueba> genetico = new GeneticAlgorithm<IndividuoPrueba>(10, 5, () => {
+            GeneticAlgorithm<IndividuoPrueba> genetico 
+                = new GeneticAlgorithm<IndividuoPrueba>(10, 5, () =>
+            {
                 var _representacion = new float[size];
                 for (int i = 0; i < size; i++)
                 {
-                    _representacion[i] = r.Next();
+                    _representacion[i] = (float)Math.Floor(r.NextDouble()*400);
                 }
-                return new IndividuoPrueba( ref nodos, _representacion);
+                return new IndividuoPrueba(ref nodos, _representacion);
             });
 
-            
+            var pob = genetico.Run(10, true);
+
+            Console.WriteLine($"ind: {pob.First().Fitness}");
+
 
 
 
             //Ejecucion
-            var ns = nodos.GetRaiz().F(nodos.GetRaiz(),
-                new object[] { 51,-56 });
-            Console.WriteLine($"Nodos visitados: {ns}");
-            Console.WriteLine($"La complejidad Ciclomática del " +
-                $"grafo es de {nodos.GetCC()}");
             Console.ReadKey();
         }
     }

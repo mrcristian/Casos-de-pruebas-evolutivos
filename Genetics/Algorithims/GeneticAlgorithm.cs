@@ -21,6 +21,7 @@ namespace Genetics.Algorithims
         }
 
         public IEnumerable<T> Run(int genCount,
+            bool max = false,
             Action<IEnumerable<T>> genConfiguration = null)            
         {
             var currentGen = Get_initialGeneration()                
@@ -29,7 +30,12 @@ namespace Genetics.Algorithims
             {
                 genConfiguration?.Invoke(currentGen);
                 Do_crossGeneration(currentGen);
-                currentGen = currentGen
+                currentGen = (max) ?
+                    currentGen
+                    .OrderByDescending(ind => ind.Fitness)
+                    .Take(_indCount)
+                    .ToList() :
+                    currentGen
                     .OrderBy(ind => ind.Fitness)
                     .Take(_indCount)
                     .ToList();

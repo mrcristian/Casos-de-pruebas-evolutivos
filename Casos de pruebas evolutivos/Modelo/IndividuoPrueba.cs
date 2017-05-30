@@ -17,8 +17,9 @@ namespace Casos_de_pruebas_evolutivos.Modelo
         }
         #endregion
 
-        private Grafo _grafo { get; set; }
+        public Grafo _grafo { get; set; }
         public float[] _representacion { get; set; }
+        public int NumVariables { get; set; }
 
         private float _fintess;        
 
@@ -27,7 +28,9 @@ namespace Casos_de_pruebas_evolutivos.Modelo
         public IndividuoPrueba(ref Grafo newGrafo, float[] representacion)
         {            
             _grafo = newGrafo;
+            NumVariables = _grafo.nVariables;
             _representacion = representacion;
+            
             _fintess = Evaluacion(this);
         }
 
