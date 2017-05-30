@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casos de pruebas evolutivos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrafosCasosPrueba", "GrafosCasosPueba\GrafosCasosPrueba.csproj", "{2BF81385-5A5B-43C8-85FD-7A968B1270E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Genetics", "D:\Mondragon\Universidad\Noveno semestre\Evolutivos\Heurisitcs\Genetics\Genetics.csproj", "{8046196A-5CE9-4E87-8FBD-A3BF48D2064F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Genetics", "Genetics\Genetics.csproj", "{15C28BCE-C7D5-4988-BBB3-A8DDEECBA35A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{2BF81385-5A5B-43C8-85FD-7A968B1270E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BF81385-5A5B-43C8-85FD-7A968B1270E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BF81385-5A5B-43C8-85FD-7A968B1270E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8046196A-5CE9-4E87-8FBD-A3BF48D2064F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8046196A-5CE9-4E87-8FBD-A3BF48D2064F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8046196A-5CE9-4E87-8FBD-A3BF48D2064F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8046196A-5CE9-4E87-8FBD-A3BF48D2064F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C28BCE-C7D5-4988-BBB3-A8DDEECBA35A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C28BCE-C7D5-4988-BBB3-A8DDEECBA35A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C28BCE-C7D5-4988-BBB3-A8DDEECBA35A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C28BCE-C7D5-4988-BBB3-A8DDEECBA35A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

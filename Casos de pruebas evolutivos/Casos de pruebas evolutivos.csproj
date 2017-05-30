@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Genetics\Genetics.csproj" />
     <ProjectReference Include="..\GrafosCasosPueba\GrafosCasosPrueba.csproj" />
-    <ProjectReference Include="D:\Mondragon\Universidad\Noveno semestre\Evolutivos\Heurisitcs\Genetics\Genetics.csproj" />
   </ItemGroup>
 
 </Project>
