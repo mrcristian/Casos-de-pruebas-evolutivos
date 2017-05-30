@@ -33,12 +33,12 @@ namespace Casos_de_pruebas_evolutivos.Modelo
 
         public IIndividual Get_Cross(IIndividual otherParent)
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public void Mutate()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

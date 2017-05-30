@@ -10,13 +10,13 @@ namespace GrafosCasosPrueba.Nodos
 
         public Dictionary<string, Nodo> Nodos { get; set; }
 
-        public Func<Nodo, object[], object> F { get; set; }
+        public Func<Nodo, object[], int> F { get; set; }
 
         public Nodo()
         {
 
         }
-        public Nodo(Func<Nodo, object[], object> funcion,
+        public Nodo(Func<Nodo, object[], int> funcion,
             string nombre)
         {
             Nombre = nombre;

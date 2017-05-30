@@ -24,65 +24,64 @@ namespace Casos_de_pruebas_evolutivos
             Grafo nodos = new Grafo(2,new float[] { 3,6 });
 
             //Funciones
-            Func<Nodo, object[], object> F1 = (nodo, data) =>
+            Func<Nodo, object[], int> F1 = (nodo, data) =>
              {
                  nodo.SetVariable("P", data[0]);
                  nodo.SetVariable("Q", data[1]);
 
-                 nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null);
-                 return null;
+                 var n = nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) +1;
+                 return n;
              };
-            Func<Nodo, object[], object> F2 = (nodo, data) =>
+            Func<Nodo, object[], int> F2 = (nodo, data) =>
             {
                 if (Convert.ToInt32(nodo.GetVariable("P"))
                 + Convert.ToInt32(nodo.GetVariable("Q")) > 10)
                 {
                     Console.WriteLine("mayor");
-                    nodo.Nodos.ToList()[0].Value.F(
-                        nodo.Nodos.ToList()[0].Value, null);
-                    return true;
+                    
+                    return nodo.Nodos.ToList()[0].Value.F(
+                        nodo.Nodos.ToList()[0].Value, null) +1;
                 }
                 else
                 {
                     Console.WriteLine("menor");
-                    nodo.Nodos.ToList()[1].Value.F(
-                        nodo.Nodos.ToList()[1].Value, null);
-                    return false;
+                    return nodo.Nodos.ToList()[1].Value.F(
+                        nodo.Nodos.ToList()[1].Value, null) + 1;
                 }
             };
-            Func<Nodo, object[], object> F3 = (nodo, data) =>
+            Func<Nodo, object[], int> F3 = (nodo, data) =>
             {
                 Console.WriteLine("Largo");
-                nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null);
-                return null;
+                return nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) + 1;
+                
             };
-            Func<Nodo, object[], object> F4 = (nodo, data) =>
+            Func<Nodo, object[], int> F4 = (nodo, data) =>
             {
                 if (Convert.ToInt32(nodo.GetVariable("P")) > 50)
                 {
                     Console.WriteLine("mayor");
-                    nodo.Nodos.ToList()[0].Value.F(
-                        nodo.Nodos.ToList()[0].Value, null);
-                    return true;
+                    return nodo.Nodos.ToList()[0].Value.F(
+                        nodo.Nodos.ToList()[0].Value, null) + 1;
+                    
                 }
                 else
                 {
                     Console.WriteLine("menor");
-                    nodo.Nodos.ToList()[1].Value.F(
-                        nodo.Nodos.ToList()[1].Value, null);
-                    return false;
+                    return nodo.Nodos.ToList()[1].Value.F(
+                        nodo.Nodos.ToList()[1].Value, null) + 1;
+                    
                 }
             };
-            Func<Nodo, object[], object> F5 = (nodo, data) =>
+            Func<Nodo, object[], int> F5 = (nodo, data) =>
             {
                 Console.WriteLine("P largo");
-                nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null);
-                return null;
+                return nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) + 1;
+                
             };
-            Func<Nodo, object[], object> F6 = (nodo, data) =>
+            Func<Nodo, object[], int> F6 = (nodo, data) =>
             {
                 Console.Write("Fin");
-                return null;
+                return 1;
             };
 
 
@@ -114,12 +113,16 @@ namespace Casos_de_pruebas_evolutivos
                     _representacion[i] = r.Next();
                 }
                 return new IndividuoPrueba( ref nodos, _representacion);
-            }); 
+            });
+
+            
+
 
 
             //Ejecucion
-            nodos.GetRaiz().F(nodos.GetRaiz(),
-                new object[] { 52, 6 });
+            var ns = nodos.GetRaiz().F(nodos.GetRaiz(),
+                new object[] { 51,-56 });
+            Console.WriteLine($"Nodos visitados: {ns}");
             Console.WriteLine($"La complejidad Ciclomática del " +
                 $"grafo es de {nodos.GetCC()}");
             Console.ReadKey();
