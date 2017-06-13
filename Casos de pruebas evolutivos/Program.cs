@@ -127,7 +127,7 @@ namespace Casos_de_pruebas_evolutivos
             int size = nodos.nVariables * nodos.GetCC();
             //Creacion genetico
             GeneticAlgorithm<IndividuoPrueba> genetico 
-                = new GeneticAlgorithm<IndividuoPrueba>(10, 5, () =>
+                = new GeneticAlgorithm<IndividuoPrueba>(1000, 5, () =>
             {
                 var _representacion = new float[size];
                 for (int i = 0; i < size; i++)
@@ -141,9 +141,10 @@ namespace Casos_de_pruebas_evolutivos
             var pob = genetico.Run(10, true);
 
             Console.WriteLine($"ind: {pob.First().Fitness}");
-
-
-
+            foreach (float item in pob.First()._representacion)
+            {
+                Console.Write(item + "|");
+            }
 
             //Ejecucion
             Console.ReadKey();
