@@ -12,10 +12,7 @@ namespace GrafosCasosPrueba.Nodos
 
         public Func<Nodo, float[], string> F { get; set; }
 
-        public Nodo()
-        {
-
-        }
+        public Nodo() { }
         public Nodo(Func<Nodo, float[], string> funcion,
             string nombre)
         {

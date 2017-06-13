@@ -36,7 +36,7 @@ namespace Casos_de_pruebas_evolutivos
 
             #endregion
 
-            Grafo nodos = new Grafo(2, new float[] { 3, 6 });
+            Grafo nodos = new Grafo(2);
 
             //Funciones
             Func<Nodo, float[], string> F1 = (nodo, data) =>

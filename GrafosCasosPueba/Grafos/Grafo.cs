@@ -8,32 +8,33 @@ namespace GrafosCasosPrueba.Nodos
     public class Grafo
     {
         private int _numAristas;
-        private Dictionary<string, Nodo> _grafo;
+        private Dictionary<string, Nodo> _nodos;
         public int nVariables { get; set; }
         public float[] variables { get; set; }
+        public Dictionary<string, Nodo> Nodos { get; set; }
 
-
-        public Grafo(int nVariables, float[]variables)
+        public Grafo() { }
+        public Grafo(int nVariables)
         {
             _numAristas = 0;
-            _grafo = new Dictionary<string, Nodo>();
+            _nodos = new Dictionary<string, Nodo>();
             this.nVariables = nVariables;
             this.variables = variables;
         }
 
         public void AddNodo(string key,Nodo newNodo) {
-            if (!_grafo.ContainsKey(key)) {
-                _grafo.Add(key,newNodo);
+            if (!_nodos.ContainsKey(key)) {
+                _nodos.Add(key,newNodo);
             }
         }
         public void RelacionarNodos(string key1, string key2) {
-            if (_grafo.ContainsKey(key1) && _grafo.ContainsKey(key2)) {
-                _grafo[key1].AddNodo(key2, _grafo[key2]);
+            if (_nodos.ContainsKey(key1) && _nodos.ContainsKey(key2)) {
+                _nodos[key1].AddNodo(key2, _nodos[key2]);
                 _numAristas++;
             }
         }
         public Nodo GetRaiz() {
-            return _grafo.First().Value;
+            return _nodos.First().Value;
         }
 
         /// <summary>
@@ -56,9 +57,9 @@ namespace GrafosCasosPrueba.Nodos
         /// no se puede calcular</returns>
         public int GetCC()
         {
-            var n1 = _grafo.Values
+            var n1 = _nodos.Values
                 .Where(g => g.Nodos.Count > 1).Count() + 1;
-            var n2 = (_numAristas - _grafo.Count) + 2;
+            var n2 = (_numAristas - _nodos.Count) + 2;
 
             return (n1 == n2) ? n1 : -1;
         }

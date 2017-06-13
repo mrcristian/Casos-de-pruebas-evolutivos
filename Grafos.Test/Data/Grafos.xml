@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<grafo numVariables ="2" >
+  <nodo nombre="A">
+  </nodo>
+  <nodo nombre="B">
+  </nodo>
+  <nodo nombre="C">
+  </nodo>
+</grafo>
