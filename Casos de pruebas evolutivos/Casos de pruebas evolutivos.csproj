@@ -10,4 +10,8 @@
     <ProjectReference Include="..\GrafosCasosPueba\GrafosCasosPrueba.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modelo.Factory\" />
+  </ItemGroup>
+
 </Project>

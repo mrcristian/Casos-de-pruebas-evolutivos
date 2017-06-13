@@ -13,7 +13,7 @@ namespace Casos_de_pruebas_evolutivos
         static void Main(string[] args)
         {
             #region funcionDeEvaluacion
-            IndividuoPrueba.SetEvaluacion((ind) =>
+            Func<IndividuoPrueba,float> fun = (ind) =>
             {
                 Dictionary<string, string> recorridos
                 = new Dictionary<string, string>();
@@ -23,14 +23,17 @@ namespace Casos_de_pruebas_evolutivos
                     var variables = new float[ind.NumVariables];
                     for (int j = 0; j < ind.NumVariables; j++)
                     {
-                        variables[j] = ind._representacion[i+j];
+                        variables[j] = ind._representacion[i + j];
                     }
                     var camino = ind._grafo.getCamino(variables);
                     if (!recorridos.ContainsKey(camino))
                         recorridos.Add(camino, camino);
                 }
                 return recorridos.Count;
-            });
+            };
+            IndividuoPrueba.SetEvaluacion(fun);
+
+
             #endregion
 
             Grafo nodos = new Grafo(2, new float[] { 3, 6 });
@@ -109,6 +112,7 @@ namespace Casos_de_pruebas_evolutivos
             nodos.AddNodo("nodo5", new Nodo(F5, "nodo5"));
             nodos.AddNodo("nodo6", new Nodo(F6, "nodo6"));
 
+
             //Relaciones
             nodos.RelacionarNodos("nodo1", "nodo2");
             nodos.RelacionarNodos("nodo2", "nodo3");
@@ -130,7 +134,8 @@ namespace Casos_de_pruebas_evolutivos
                 {
                     _representacion[i] = (float)Math.Floor(r.NextDouble()*400);
                 }
-                return new IndividuoPrueba(ref nodos, _representacion);
+                return new IndividuoPrueba(ref nodos, fun,null,
+                    null, _representacion);
             });
 
             var pob = genetico.Run(10, true);

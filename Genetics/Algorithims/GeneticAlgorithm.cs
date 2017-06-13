@@ -30,6 +30,7 @@ namespace Genetics.Algorithims
             {
                 genConfiguration?.Invoke(currentGen);
                 Do_crossGeneration(currentGen);
+
                 currentGen = (max) ?
                     currentGen
                     .OrderByDescending(ind => ind.Fitness)

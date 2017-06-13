@@ -20,12 +20,35 @@ namespace Casos_de_pruebas_evolutivos.Modelo
         public Grafo _grafo { get; set; }
         public float[] _representacion { get; set; }
         public int NumVariables { get; set; }
+        
 
-        private float _fintess;        
+        private float _fintess;
+        private Func<IIndividual, IIndividual> _getCross;
+        private Action _doMutate;
+        private Func<IndividuoPrueba, float> _doEvaluate;
 
         public float Fitness => _fintess;
 
-        public IndividuoPrueba(ref Grafo newGrafo, float[] representacion)
+        public Func<IndividuoPrueba, float> Evaluate {
+            get => _doEvaluate;
+            set => _doEvaluate = value;
+        }
+
+        Func<IIndividual, IIndividual> IIndividual.Get_Cross {
+            get => _getCross;
+            set => _getCross = value;
+        }
+        Action IIndividual.Mutate
+        {
+            get => _doMutate;
+            set => _doMutate = value;
+        }
+
+        public IndividuoPrueba(ref Grafo newGrafo,
+            Func<IndividuoPrueba, float> eval,
+            Action mutation,
+            Func<IIndividual, IIndividual> cross,
+            float[] representacion)
         {            
             _grafo = newGrafo;
             NumVariables = _grafo.nVariables;
@@ -34,14 +57,6 @@ namespace Casos_de_pruebas_evolutivos.Modelo
             _fintess = Evaluacion(this);
         }
 
-        public IIndividual Get_Cross(IIndividual otherParent)
-        {
-            return this;
-        }
-
-        public void Mutate()
-        {
-            
-        }
+        
     }
 }
