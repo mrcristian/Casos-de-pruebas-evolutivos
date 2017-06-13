@@ -1,6 +1,7 @@
 ﻿using Genetics.Population;
 using GrafosCasosPrueba.Nodos;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -36,7 +37,18 @@ namespace Casos_de_pruebas_evolutivos.Modelo
 
         public IIndividual Get_Cross(IIndividual otherParent)
         {
-            return this;
+            int datosATomar = (this._representacion.Length % 2 == 0) ? this._representacion.Length / 2 : (this._representacion.Length / 2) + 1;
+            Grafo aux = this._grafo;
+            IndividuoPrueba nuevo = new IndividuoPrueba(ref aux, new float[this._representacion.Length]);
+
+            var newRep = this._representacion.Take(datosATomar)
+                .Concat(
+                ((IndividuoPrueba)otherParent)._representacion
+                .Skip(datosATomar)
+                .Take(this._representacion.Length - datosATomar))
+                .ToArray();
+            nuevo._representacion = (float[])newRep;
+            return nuevo;
         }
 
         public void Mutate()
