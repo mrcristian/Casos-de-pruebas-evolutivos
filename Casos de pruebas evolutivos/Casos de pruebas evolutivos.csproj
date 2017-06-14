@@ -14,4 +14,10 @@
     <Folder Include="Modelo.Factory\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\Grafos.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

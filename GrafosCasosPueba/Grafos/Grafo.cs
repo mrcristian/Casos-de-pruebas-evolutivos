@@ -56,11 +56,9 @@ namespace GrafosCasosPrueba.Nodos
         {
             foreach (var key in aristas.Keys)
             {
-                var nodo1 = _nodos[key];
                 foreach (var key2 in aristas[key])
                 {
-                    var nodo2 = _nodos[key2];
-                    nodo1.AddNodo(key2, nodo2);
+                    RelacionarNodos(key, key2);
                 }
             }
         }

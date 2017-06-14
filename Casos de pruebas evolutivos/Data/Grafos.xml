@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<grafos>
+  <grafo numVariables ="2" >
+    <nodo nombre="A"
+          tipo="asignacion">
+      <asignacion variable="P">
+        <operando tipo="entrada">0</operando>
+      </asignacion>
+      <asignacion variable="Q">
+        <operando tipo="entrada">1</operando>
+      </asignacion>
+      <subnodo>
+        <item>B</item>
+      </subnodo>
+      <siguiente>B</siguiente>
+    </nodo>
+    <nodo nombre="B" tipo="comparacion">
+      <operacion tipo="mayor">
+        <operando tipo="suboperacion">
+          <operacion tipo="suma">
+            <operando tipo="variable">P</operando>
+            <operando tipo="variable">Q</operando>
+          </operacion>
+        </operando>
+        <operando tipo="valor">10</operando>
+      </operacion>
+      <subnodo>
+        <item>C</item>
+        <item>D</item>
+      </subnodo>
+      <siguiente>C</siguiente>
+      <siguiente>D</siguiente>
+    </nodo>
+    <nodo nombre="C" tipo="bloque">
+      <subnodo>
+        <item>D</item>
+      </subnodo>
+      <siguiente>D</siguiente>
+    </nodo>
+    <nodo nombre="D" tipo="comparacion">
+      <operacion tipo="mayor">
+        <operando tipo="variable">P</operando>
+        <operando tipo="valor">10</operando>
+      </operacion>
+      <subnodo>
+        <item>E</item>
+        <item>F</item>
+      </subnodo>
+      <siguiente>E</siguiente>
+      <siguiente>F</siguiente>
+    </nodo>
+    <nodo nombre="E" tipo="bloque">
+      <subnodo>
+        <item>F</item>
+      </subnodo>
+      <siguiente>F</siguiente>
+    </nodo>
+    <nodo nombre="F" tipo="final">
+    </nodo>
+  </grafo>
+  <grafo numVariables ="4" >
+    <nodo nombre="A"
+          tipo="asignacion">
+      <asignacion variable="A">
+        <operando tipo="entrada">0</operando>
+      </asignacion>
+      <asignacion variable="B">
+        <operando tipo="entrada">1</operando>
+      </asignacion>
+      <asignacion variable="C">
+        <operando tipo="entrada">2</operando>
+      </asignacion>
+      <asignacion variable="D">
+        <operando tipo="entrada">3</operando>
+      </asignacion>
+      <subnodo>
+        <item>B</item>
+      </subnodo>
+      <siguiente>B</siguiente>
+    </nodo>
+    <nodo nombre="B" tipo="comparacion">
+      <operacion tipo="menor">
+        <operando tipo="variable">A</operando>
+        <operando tipo="variable">B</operando>
+      </operacion>
+      <subnodo>
+        <item>C</item>
+        <item>D</item>
+      </subnodo>
+      <siguiente>C</siguiente>
+      <siguiente>D</siguiente>
+    </nodo>
+    <nodo nombre="C" tipo="bloque">
+      <subnodo>
+        <item>E</item>
+      </subnodo>
+      <siguiente>E</siguiente>
+    </nodo>
+    <nodo nombre="D" tipo="bloque">
+      <subnodo>
+        <item>F</item>
+      </subnodo>
+      <siguiente>F</siguiente>
+    </nodo>
+    <nodo nombre="E" tipo="comparacion">
+      <operacion tipo="diferente">
+        <operando tipo="variable">C</operando>
+        <operando tipo="valor">5</operando>
+      </operacion>
+      <subnodo>
+        <item>G</item>
+        <item>H</item>
+      </subnodo>
+      <siguiente>G</siguiente>
+      <siguiente>H</siguiente>
+    </nodo>
+    <nodo nombre="F" tipo="comparacion">
+      <operacion tipo="mayor-igual">
+        <operando tipo="variable">D</operando>
+        <operando tipo="valor">8</operando>
+      </operacion>
+      <subnodo>
+        <item>H</item>
+        <item>I</item>
+      </subnodo>
+      <siguiente>H</siguiente>
+      <siguiente>I</siguiente>
+    </nodo>
+    <nodo nombre="G" tipo="bloque">
+      <subnodo>
+        <item>J</item>
+      </subnodo>
+      <siguiente>J</siguiente>
+    </nodo>
+    <nodo nombre="H" tipo="bloque">
+      <subnodo>
+        <item>J</item>
+      </subnodo>
+      <siguiente>J</siguiente>
+    </nodo>
+    <nodo nombre="I" tipo="bloque">
+      <subnodo>
+        <item>K</item>
+      </subnodo>
+      <siguiente>K</siguiente>
+    </nodo>
+    <nodo nombre="J" tipo="bloque">
+      <subnodo>
+        <item>K</item>
+      </subnodo>
+      <siguiente>K</siguiente>
+    </nodo>
+    <nodo nombre="K" tipo="final">
+    </nodo>
+  </grafo>
+  <grafo numVariables ="1" >
+    <nodo nombre="A"
+          tipo="asignacion">
+      <asignacion variable="number">
+        <operando tipo="entrada">0</operando>
+      </asignacion>
+      <subnodo>
+        <item>B</item>
+      </subnodo>
+      <siguiente>B</siguiente>
+    </nodo>
+    <nodo nombre="B"
+          tipo="asignacion">
+      <asignacion variable="sum">
+        <operando tipo="valor">0</operando>
+      </asignacion>
+      <asignacion variable="pos">
+        <operando tipo="valor">1</operando>
+      </asignacion>
+      <subnodo>
+        <item>C</item>
+      </subnodo>
+      <siguiente>C</siguiente>
+    </nodo>
+    <nodo nombre="C"
+          tipo="asignacion">
+      <asignacion variable="digit">
+        <operando tipo="suboperacion">
+          <operacion tipo="mod">
+            <operando tipo="variable">number</operando>
+            <operando tipo="valor">10</operando>
+          </operacion>
+        </operando>
+      </asignacion>
+      <subnodo>
+        <item>D</item>
+      </subnodo>
+      <siguiente>D</siguiente>
+    </nodo>
+    <nodo nombre="D" tipo="comparacion">
+      <operacion tipo="igual">
+        <operando tipo="suboperacion">
+          <operacion tipo="mod">
+            <operando tipo="variable">pos</operando>
+            <operando tipo="valor">2</operando>
+          </operacion>
+        </operando>
+        <operando tipo="valor">0</operando>
+      </operacion>
+      <subnodo>
+        <item>E</item>
+        <item>F</item>
+      </subnodo>
+      <siguiente>E</siguiente>
+      <siguiente>F</siguiente>
+    </nodo>
+    <nodo nombre="E"
+          tipo="asignacion">
+      <asignacion variable="value">
+        <operando tipo="suboperacion">
+          <operacion tipo="multiplicacion">
+            <operando tipo="valor">2</operando>
+            <operando tipo="variable">digit</operando>
+          </operacion>
+        </operando>
+      </asignacion>
+      <subnodo>
+        <item>G</item>
+      </subnodo>
+      <siguiente>G</siguiente>
+    </nodo>
+    <nodo nombre="F"
+          tipo="asignacion">
+      <asignacion variable="value">
+        <operando tipo="variable">digit</operando>
+      </asignacion>
+      <subnodo>
+        <item>G</item>
+      </subnodo>
+      <siguiente>G</siguiente>
+    </nodo>
+    <nodo nombre="G"
+          tipo="asignacion">
+      <asignacion variable="number">
+        <operando tipo="suboperacion">
+          <operacion tipo="division">
+            <operando tipo="variable">number</operando>
+            <operando tipo="valor">10</operando>
+          </operacion>
+        </operando>
+      </asignacion>
+      <asignacion variable="pos">
+        <operando tipo="suboperacion">
+          <operacion tipo="suma">
+            <operando tipo="variable">pos</operando>
+            <operando tipo="valor">1</operando>
+          </operacion>
+        </operando>
+      </asignacion>
+      <subnodo>
+        <item>H</item>
+      </subnodo>
+      <siguiente>H</siguiente>
+    </nodo>
+    <nodo nombre="H" tipo="comparacion">
+      <operacion tipo="menor">
+        <operando tipo="variable">number</operando>
+        <operando tipo="valor">10</operando>
+      </operacion>
+      <subnodo>
+        <item>I</item>
+        <item>C</item>
+      </subnodo>
+      <siguiente>I</siguiente>
+      <siguiente>C</siguiente>
+    </nodo>
+    <nodo nombre="I"
+          tipo="asignacion">
+      <asignacion variable="result">
+        <operando tipo="suboperacion">
+          <operacion tipo="mod">
+            <operando tipo="variable">sum</operando>
+            <operando tipo="valor">11</operando>
+          </operacion>
+        </operando>
+      </asignacion>
+      <subnodo>
+        <item>J</item>
+      </subnodo>
+      <siguiente>J</siguiente>
+    </nodo>
+    <nodo nombre="J" tipo="comparacion">
+      <operacion tipo="igual">
+        <operando tipo="variable">result</operando>
+        <operando tipo="valor">10</operando>
+      </operacion>
+      <subnodo>
+        <item>K</item>
+        <item>L</item>
+      </subnodo>
+      <siguiente>K</siguiente>
+      <siguiente>L</siguiente>
+    </nodo>
+    <nodo nombre="K"
+          tipo="asignacion">
+      <asignacion variable="result">
+        <operando tipo="valor">1</operando>
+      </asignacion>
+      <subnodo>
+        <item>L</item>
+      </subnodo>
+      <siguiente>L</siguiente>
+    </nodo>
+    <nodo nombre="L" tipo="final">
+    </nodo>
+  </grafo>
+</grafos>

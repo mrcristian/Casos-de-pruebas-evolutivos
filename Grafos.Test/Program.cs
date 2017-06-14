@@ -11,11 +11,10 @@ namespace Grafos.Test
             List<float[]> entradas = new List<float[]>()
             {
                 new float[] { 51, -45},
-                new float[] {5, 4, 6, 8},
+                new float[] { 5, 4, 6, 8},
                 new float[] { 100 },
             };
-            GrafoFactory gf = new GrafoFactory(
-                    new XmlManager.Manager.XmlParser("Data/Grafos.xml"));
+            GrafoFactory gf = new GrafoFactory("Data/Grafos.xml");
             int index = 0;
             foreach (var item in gf.ReadFromFile())
             {

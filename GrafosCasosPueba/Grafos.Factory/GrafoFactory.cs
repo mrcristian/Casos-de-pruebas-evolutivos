@@ -12,10 +12,16 @@ namespace GrafosCasosPrueba.Grafos.Factory
     public class GrafoFactory
     {
         private XmlParser _parser;
+        
 
         public GrafoFactory(XmlParser parser)
         {
             _parser = parser;
+        }
+
+        public GrafoFactory(string filePath)
+        {
+            _parser = new XmlParser(filePath);
         }
 
         public IEnumerable<Grafo> ReadFromFile()
