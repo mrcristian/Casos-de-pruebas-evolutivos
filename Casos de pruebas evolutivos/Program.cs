@@ -131,7 +131,8 @@ namespace Casos_de_pruebas_evolutivos
                 var _representacion = new float[size];
                 for (int i = 0; i < size; i++)
                 {
-                    _representacion[i] = (float)Math.Floor(r.NextDouble()*400);
+                    _representacion[i] = 
+                    (float)Math.Floor(r.NextDouble()*400);
                 }
                 return new IndividuoPrueba(ref nodos, fun,null,
                     null, _representacion);

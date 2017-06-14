@@ -74,7 +74,11 @@ namespace GrafosCasosPrueba.Grafos.Factory
             switch (tipo)
             {
                 case "asignacion":
-                    return get_AssingFunction(variables, siguientes[0]);
+                    var asignaciones = elemNodo.Descendants("asignacion");
+                    return get_AssingFunction(asignaciones,
+                        variables, siguientes[0]);
+                case "bloque":
+                    return get_BlockFunction(siguientes[0]);
                 case "comparacion":
                     var comparacion = get_Comparisson(
                         elemNodo.Descendants("operacion").First());
@@ -103,6 +107,8 @@ namespace GrafosCasosPrueba.Grafos.Factory
                     return (nodo) => op1(nodo) >= op2(nodo);
                 case "menor-igual":
                     return (nodo) => op1(nodo) <= op2(nodo);
+                case "diferente":
+                    return (nodo) => op1(nodo) != op2(nodo);
                 default:
                     return (nodo) => op1(nodo) == op2(nodo);
             }
@@ -121,6 +127,8 @@ namespace GrafosCasosPrueba.Grafos.Factory
                     return (nodo) => op1(nodo) + op2(nodo);
                 case "resta":
                     return (nodo) => op1(nodo) - op2(nodo);
+                case "mod":
+                    return (nodo) => op1(nodo) % op2(nodo);
                 case "multiplicacion":
                     return (nodo) => op1(nodo) * op2(nodo);
                 case "division":
@@ -130,7 +138,8 @@ namespace GrafosCasosPrueba.Grafos.Factory
             }
         }
 
-        private Func<Nodo, int> get_Operator(XElement operando)
+        private Func<Nodo, int> get_Operator(XElement operando,
+            float[] data = null)
         {
             var tipo = operando.Attribute("tipo").Value;
             switch (tipo)
@@ -140,6 +149,9 @@ namespace GrafosCasosPrueba.Grafos.Factory
                 case "variable":
                     return (nodo) => Convert.ToInt32(
                         nodo.GetVariable(operando.Value));
+                case "entrada":
+                    return (nodo) =>
+                    (int)data[Convert.ToInt32(operando.Value)];
                 case "suboperacion":
                     return get_Operation(
                         operando.Descendants("operacion").First());
@@ -150,6 +162,7 @@ namespace GrafosCasosPrueba.Grafos.Factory
 
 
 
+
         /// <summary>
         /// Función que crea una función 
         /// capaz de asignar múltiples variables
@@ -157,20 +170,45 @@ namespace GrafosCasosPrueba.Grafos.Factory
         /// <param name="varibles">nombre de las variables a ser asignadas</param>
         /// <returns>La función con las variables asignadas</returns>
         private Func<Nodo, float[], string>
-            get_AssingFunction(string[] varibles, string siguiente)
+            get_AssingFunction(IEnumerable<XElement> asignaciones,
+            string[] varibles, string siguiente)
         {
+            List<Action<Nodo, float[]>> funcs
+                = new List<Action<Nodo, float[]>>();
+            foreach (var assign in asignaciones)
+            {
+                var variable = assign.Attribute("variable").Value;
+                funcs.Add((nodo, data) =>
+                {
+                    var value = get_Operator(
+                        assign.Descendants("operando").First(), data);
+                    nodo.SetVariable(variable, value(nodo));
+                });
+            }
+
             Func<Nodo, float[], string> f = (nodo, data) =>
             {
-                for (int i = 0; i < varibles.Length; i++)
+                foreach (var func in funcs)
                 {
-                    var variable = varibles[i];
-                    nodo.SetVariable(variable, data[i]);
+                    func(nodo, data);
                 }
                 var n = nodo.Nodos[siguiente].Function(null) +
                 "-" + nodo.Nombre;
                 return n;
             };
             return f;
+        }
+
+        /// <summary>
+        /// Función que retorna una función de bloque
+        /// </summary>
+        /// <param name="siguiente">nombre del siguiente nodo</param>
+        /// <returns></returns>
+        private Func<Nodo, float[], string>
+            get_BlockFunction(string siguiente)
+        {
+            return (nodo, data) => nodo.Nodos[siguiente]
+                            .Function(null) + "-" + nodo.Nombre;
         }
 
         /// <summary>
