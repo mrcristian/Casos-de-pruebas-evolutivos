@@ -45,7 +45,8 @@ namespace Casos_de_pruebas_evolutivos
                  nodo.SetVariable("Q", data[1]);
 
 
-                 var n = nodo.Nodos.First().Value.F(nodo.Nodos.First().Value, null) +
+                 var n = nodo.Nodos.First().Value.F(
+                     nodo.Nodos.First().Value, null) +
                  "-" + nodo.Nombre;
                  return n;
              };
@@ -54,8 +55,6 @@ namespace Casos_de_pruebas_evolutivos
                 if (Convert.ToInt32(nodo.GetVariable("P"))
                 + Convert.ToInt32(nodo.GetVariable("Q")) > 10)
                 {
-                    
-
                     return nodo.Nodos.ToList()[0].Value.F(
                         nodo.Nodos.ToList()[0].Value, null) + "-" + nodo.Nombre;
                 }

@@ -12,12 +12,16 @@ namespace GrafosCasosPrueba.Nodos
 
         public Func<Nodo, float[], string> F { get; set; }
 
-        public Nodo() { }
+        public Nodo()
+        {
+
+            Nodos = new Dictionary<string, Nodo>();
+        }
         public Nodo(Func<Nodo, float[], string> funcion,
             string nombre)
+            :this()
         {
             Nombre = nombre;
-            Nodos = new Dictionary<string, Nodo>();
             F = funcion;
         }
 
@@ -26,7 +30,10 @@ namespace GrafosCasosPrueba.Nodos
             Nodos.Add(id, newNodo);
         }
 
-
+        public string Function(float[] args)
+        {
+            return (F != null) ? F(this, args) : "";
+        }
 
 
     }

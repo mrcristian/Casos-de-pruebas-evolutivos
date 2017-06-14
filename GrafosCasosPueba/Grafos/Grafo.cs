@@ -11,15 +11,21 @@ namespace GrafosCasosPrueba.Nodos
         private Dictionary<string, Nodo> _nodos;
         public int nVariables { get; set; }
         public float[] variables { get; set; }
-        public Dictionary<string, Nodo> Nodos { get; set; }
+        public Dictionary<string, Nodo> Nodos
+        {
+            get => _nodos;
+            set => _nodos = value;
+        }
 
-        public Grafo() { }
-        public Grafo(int nVariables)
+        public Grafo()
         {
             _numAristas = 0;
             _nodos = new Dictionary<string, Nodo>();
+        }
+        public Grafo(int nVariables)
+            :this()
+        {
             this.nVariables = nVariables;
-            this.variables = variables;
         }
 
         public void AddNodo(string key,Nodo newNodo) {
@@ -35,6 +41,28 @@ namespace GrafosCasosPrueba.Nodos
         }
         public Nodo GetRaiz() {
             return _nodos.First().Value;
+        }
+
+        /// <summary>
+        /// Método que conecta las aristas de un grafo
+        /// </summary>
+        /// <param name="aristas">
+        /// Las aristas que unen los nodos del grafo,
+        /// las llaves del diccionario deben coincidir con 
+        /// las llaves del diccionario _nodos
+        /// </param>
+        public void Set_Adyacencias(
+            Dictionary<string, string[]> aristas)
+        {
+            foreach (var key in aristas.Keys)
+            {
+                var nodo1 = _nodos[key];
+                foreach (var key2 in aristas[key])
+                {
+                    var nodo2 = _nodos[key2];
+                    nodo1.AddNodo(key2, nodo2);
+                }
+            }
         }
 
         /// <summary>

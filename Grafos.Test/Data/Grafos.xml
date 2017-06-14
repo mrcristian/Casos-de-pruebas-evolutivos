@@ -1,10 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <grafo numVariables ="2" >
-  <nodo nombre="A">
+  <nodo nombre="A"
+        tipo="asignacion">
+    <variable>P</variable>
+    <variable>Q</variable>
+    <subnodo>
+      <item>B</item>
+    </subnodo>
+    <siguiente>B</siguiente>
   </nodo>
-  <nodo nombre="B">
+  <nodo nombre="B" tipo="comparacion">
+    <operacion tipo="mayor-igual">
+      <operando tipo="suboperacion">
+        <operacion tipo="suma">
+          <operando tipo="variable">P</operando>
+          <operando tipo="variable">Q</operando>
+        </operacion>
+      </operando>
+      <operando tipo="valor">100</operando>
+    </operacion>
+    <subnodo>
+      <item>C</item>
+      <item>D</item>
+    </subnodo>
+    <siguiente>C</siguiente>
+    <siguiente>D</siguiente>
   </nodo>
-  <nodo nombre="C">
+  <nodo nombre="C"
+          tipo="final">
   </nodo>
+  <nodo nombre="D"
+            tipo="final">
+    </nodo>
 </grafo>

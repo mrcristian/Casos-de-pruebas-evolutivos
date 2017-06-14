@@ -12,8 +12,10 @@ namespace Grafos.Test
                     new XmlManager.Manager.XmlParser("Data/Grafos.xml"));
             foreach (var item in gf.ReadFromFile())
             {
-                Console.WriteLine(item);
+                var s = item.GetRaiz().Function(new float[] { 94 , 6 });
+                Console.WriteLine(s);
             }
+            Console.ReadKey();
         }
     }
 }
