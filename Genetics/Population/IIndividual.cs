@@ -8,6 +8,6 @@ namespace Genetics.Population
     {
         float Fitness { get; }
         IIndividual Get_Cross(IIndividual otherParent);
-        void Mutate()
+        void Mutate();
     }
 }

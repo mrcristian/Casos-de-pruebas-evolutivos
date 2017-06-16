@@ -94,6 +94,71 @@ namespace Casos_de_pruebas_evolutivos.Controladores
                 (numIteraciones, pobCount, funAleatorea);
             return genetico.Run(pobCount, max, funConfiguracion);
         }
-        
+
+        public Func<IndividuoPrueba, float> getFuncionEvaluacionA() {
+            Func<IndividuoPrueba, float> funcionEvaluacionA = (ind) =>
+            {
+                var nVar = ind._grafo.nVariables;
+                var total = ind._grafo.Nodos.Count;
+                var nodosVisitados = "";
+                for (int i = 0; i < ind._representacion.Length; i += nVar)
+                {
+                    var variables = ind._representacion
+                    .Skip(i)
+                    .Take(nVar)
+                    .ToArray();
+                    nodosVisitados += "-" + ind._grafo.GetRaiz().Function(variables);
+                }
+                var num = nodosVisitados.Split('-')
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Distinct().Count();
+                return (float)num / (float)total;
+            };
+            return funcionEvaluacionA;
+        }
+        public Func<IndividuoPrueba, float> getFuncionEvaluacionB() {
+            Func<IndividuoPrueba, float> funcionEvaluacionB = (ind) =>
+            {
+                var nVar = ind._grafo.nVariables;
+                List<String> diferentes = new List<string>();
+                for (int i = 0; i < ind._representacion.Length; i += nVar)
+                {
+                    var variables = ind._representacion
+                    .Skip(i)
+                    .Take(nVar)
+                    .ToArray();
+                    if (!diferentes.Contains(variables.ToString()))
+                    {
+                        diferentes.Add(ind._grafo.GetRaiz().Function(variables));
+                    }
+
+                }
+                return diferentes.Count;
+            };
+            return funcionEvaluacionB;
+        }
+        public Func<IndividuoPrueba, IndividuoPrueba, IndividuoPrueba> getFuncionCruceA() {
+            Func<IndividuoPrueba, IndividuoPrueba, IndividuoPrueba> funcionCruceA = (ind1, ind2) =>
+            {
+                int datosATomar = (ind1._representacion.Length % 2 == 0)
+                ? ind1._representacion.Length / 2 : (ind1._representacion.Length / 2) + 1;
+                Grafo aux = ind1._grafo;
+                var ev = ind1.Evaluacion;
+                var mut = ind1.GetMutation;
+                var cross = ind1.GetCross;
+                IndividuoPrueba nuevo = new IndividuoPrueba(ref aux, ref ev,
+                    ref mut, ref cross, new float[ind1._representacion.Length]);
+
+                var newRep = ind1._representacion.Take(datosATomar)
+                    .Concat(
+                    ((IndividuoPrueba)ind2)._representacion
+                    .Skip(datosATomar)
+                    .Take(ind1._representacion.Length - datosATomar))
+                    .ToArray();
+                nuevo._representacion = (float[])newRep;
+                return nuevo;
+            };
+            return funcionCruceA;
+        }
     }
 }

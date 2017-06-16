@@ -24,6 +24,9 @@ namespace Casos_de_pruebas_evolutivos.Modelo
         private Func<IndividuoPrueba, float> _doEvaluate;
 
         public Func<IndividuoPrueba, float> Evaluacion => _doEvaluate;
+        public Action<IndividuoPrueba> GetMutation => _doMutate;
+        public Func<IndividuoPrueba, IndividuoPrueba,
+            IndividuoPrueba> GetCross => _getCross;
         public float Fitness => _fintess;
 
         public Func<IndividuoPrueba, float> Evaluate {
